@@ -18,7 +18,7 @@ This action has no inputs.
 
 ### Outputs
 
-This action has no inputs.
+This action has no outputs.
 
 ## Examples
 
