@@ -1,5 +1,5 @@
 name: Git Checkout
-description: Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it. Leverages the official checkout action pre-configured specifically for the Codebelt methodology.
+description: Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it. Leverages the official checkout action pre-configured specifically for the majority.
 runs:
   using: composite
   steps:
