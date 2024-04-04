@@ -7,4 +7,3 @@ runs:
       with:
         fetch-depth: 0
         fetch-tags: true
-      shell: bash
