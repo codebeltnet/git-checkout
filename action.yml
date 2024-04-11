@@ -1,5 +1,10 @@
 name: Git Checkout
 description: Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it. Leverages the official checkout action pre-configured specifically for the majority.
+inputs:
+  ref:
+    description: The branch, tag or SHA to checkout. Default is 
+    required: false
+    default: ${{ github.ref }}
 runs:
   using: composite
   steps:
@@ -7,3 +12,4 @@ runs:
       with:
         fetch-depth: 0
         fetch-tags: true
+        ref: ${{ inputs.ref }}
