@@ -2,9 +2,13 @@ name: Git Checkout
 description: Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it. Leverages the official checkout action pre-configured specifically for the majority.
 inputs:
   ref:
-    description: The branch, tag or SHA to checkout. Default is 
+    description: The branch, tag or SHA to checkout. Default is the head of the default branch in the repository.
     required: false
     default: ${{ github.ref }}
+  uploadSnapshot:
+    description: Upload the repo as-is for debug purposes. Default is to not upload.
+    required: false
+    default: 'false'
 runs:
   using: composite
   steps:
@@ -13,3 +17,10 @@ runs:
         fetch-depth: 0
         fetch-tags: true
         ref: ${{ inputs.ref }}
+
+    - if: inputs.uploadSnapshot == 'true'
+      name: Upload Repository
+      uses: actions/upload-artifact@v4
+      with:
+        name: ${{ github.sha }}
+        path: ${{ github.workspace }}
