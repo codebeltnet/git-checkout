@@ -5,7 +5,7 @@ inputs:
     description: The branch, tag or SHA to checkout. Default is the head of the default branch in the repository.
     required: false
     default: ${{ github.ref }}
-  uploadSnapshot:
+  uploadCheckout:
     description: Upload the repo as-is for debug purposes. Default is to not upload.
     required: false
     default: 'false'
@@ -18,7 +18,7 @@ runs:
         fetch-tags: true
         ref: ${{ inputs.ref }}
 
-    - if: inputs.uploadSnapshot == 'true'
+    - if: inputs.Checkout == 'true'
       name: Upload Repository
       uses: actions/upload-artifact@v4
       with:
