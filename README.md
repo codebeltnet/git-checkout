@@ -23,7 +23,13 @@ uses: codebeltnet/git-checkout@main
 
 ### Inputs
 
-This action has no inputs.
+```yaml
+with:
+  # The branch, tag or SHA to checkout. Default is the head of the default branch in the repository.
+  ref:
+  # Upload the repo as-is for debug purposes. Default is to not upload.
+  uploadCheckout:
+```
 
 ### Outputs
 
