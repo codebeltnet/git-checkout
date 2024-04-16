@@ -24,3 +24,6 @@ runs:
       with:
         name: ${{ github.sha }}
         path: ${{ github.workspace }}
+branding:
+  icon: 'umbrella'
+  color: 'blue'
