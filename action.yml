@@ -18,7 +18,7 @@ runs:
         fetch-tags: true
         ref: ${{ inputs.ref }}
 
-    - if: inputs.Checkout == 'true'
+    - if: inputs.uploadCheckout == 'true'
       name: Upload Repository
       uses: actions/upload-artifact@v4
       with:
