@@ -24,6 +24,7 @@ runs:
       with:
         name: ${{ github.sha }}
         path: ${{ github.workspace }}
+        include-hidden-files: true
 branding:
   icon: 'umbrella'
   color: 'blue'
