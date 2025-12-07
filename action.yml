@@ -12,7 +12,7 @@ inputs:
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v4
+    - uses: actions/checkout@v6
       with:
         fetch-depth: 0
         fetch-tags: true
@@ -20,7 +20,7 @@ runs:
 
     - if: inputs.uploadCheckout == 'true'
       name: Upload Repository
-      uses: actions/upload-artifact@v4
+      uses: actions/upload-artifact@v5
       with:
         name: ${{ github.sha }}
         path: ${{ github.workspace }}
