@@ -1,29 +1,37 @@
 name: Git Checkout
-description: Checks-out your repository under $GITHUB_WORKSPACE, so your workflow can access it.
+description: Checks out a repository under $GITHUB_WORKSPACE.
 inputs:
-  ref:
-    description: The branch, tag or SHA to checkout. Default is the head of the default branch in the repository.
+  repository:
+    description: Repository to check out in owner/name format. Defaults to the workflow repository.
     required: false
-    default: ${{ github.ref }}
+    default: ${{ github.repository }}
+  ref:
+    description: Branch, tag or SHA to check out. Defaults to the workflow ref for the workflow repository and the default branch for another repository.
+    required: false
+  path:
+    description: Checkout directory relative to $GITHUB_WORKSPACE. Defaults to the workspace root.
+    required: false
   uploadCheckout:
-    description: Upload the repo as-is for debug purposes. Default is to not upload.
+    description: Upload the checkout directory for debugging. Defaults to false.
     required: false
     default: 'false'
 runs:
   using: composite
   steps:
-    - uses: actions/checkout@v6
+    - uses: actions/checkout@v7
       with:
         fetch-depth: 0
         fetch-tags: true
-        ref: ${{ inputs.ref }}
+        repository: ${{ inputs.repository }}
+        ref: ${{ inputs.ref || ((!inputs.repository || inputs.repository == github.repository) && github.ref) || '' }}
+        path: ${{ inputs.path }}
 
     - if: inputs.uploadCheckout == 'true'
       name: Upload Repository
       uses: actions/upload-artifact@v7
       with:
         name: ${{ github.sha }}
-        path: ${{ github.workspace }}
+        path: ${{ inputs.path && format('{0}/{1}', github.workspace, inputs.path) || github.workspace }}
         include-hidden-files: true
 branding:
   icon: 'umbrella'
