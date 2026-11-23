@@ -25,9 +25,14 @@ uses: codebeltnet/git-checkout@v1
 
 ```yaml
 with:
-  # The branch, tag or SHA to checkout. Default is the head of the default branch in the repository.
+  # Repository in owner/name format. Defaults to the workflow repository.
+  repository:
+  # Branch, tag or SHA. Defaults to the workflow ref for the workflow repository.
+  # For a different repository, the default is its default branch.
   ref:
-  # Upload the repo as-is for debug purposes. Default is to not upload.
+  # Checkout directory relative to the workspace. Defaults to the workspace root.
+  path:
+  # Upload the checkout directory for debugging. Defaults to false.
   uploadCheckout:
 ```
 
@@ -44,6 +49,21 @@ This action has no outputs.
 steps:
   - name: Checkout
     uses: codebeltnet/git-checkout@v1
+```
+
+### Check out a shared repository alongside your code
+
+```yaml
+steps:
+  - name: Checkout
+    uses: codebeltnet/git-checkout@v1
+
+  - name: Checkout shared templates
+    uses: codebeltnet/git-checkout@v1
+    with:
+      repository: codebeltnet/docfx
+      ref: ${{ inputs.docfx_template_ref }}
+      path: shared/docfx
 ```
 
 ### Sample workflow for .NET Class Library
